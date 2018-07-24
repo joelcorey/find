@@ -11,6 +11,7 @@ spl_autoload_register(function ($class) {
     // }
     //$relative_class = substr($class, $len);
     $file = $base_dir . $prefix . str_replace('\\', '/', $class) . '.php';
+    //echo $file;
     if (file_exists($file)) {
         require $file;
     }

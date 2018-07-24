@@ -1,5 +1,7 @@
 <?php
 
+namespace ProxyAPI;
+
 class ProxyAPI
 {
     private $inputIpList;
@@ -7,7 +9,7 @@ class ProxyAPI
 
     public function getProxyList($url)
     {
-        $rawIpList = $this->get($url);
+        return $this->regexIpAddress($this->get($url));
     }
 
     public function getUnmaskedIp()
@@ -19,7 +21,7 @@ class ProxyAPI
 
     public function get($url)
     {
-        return \Httpful\Request::get($url)->send()
+        return \Httpful\Request::get($url)->send();
     }
 
     public function testIp($proxyIp, $useragent, $showResponse = false)

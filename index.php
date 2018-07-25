@@ -13,16 +13,25 @@ $ipSource = $config->assign('ipsourcelist');
 $ipList = $util->getProxyList($ipSource[0]);
 //print_r($ipList);
 
-for ($i=0; $i < 100; $i++) 
+//ENTRY: continue work on test and in-validate bad response ip's
+//ENTRY: verify actual useragent/fix
+for ($i=0; $i < 25; $i++) 
 {
-    $ip = $ipList[rand(0, count($ipList))]; 
-    echo $ip . '<br>';
-    // $useragent = $userAgentList[rand(0, count($userAgentList))];
-    // $response = testIp($ip, $useragent, $showResponse = true);
-    // print_r($response);
-    // echo "<br><br>";
-    // echo "-------------------------------";
-    // echo "<br><br>";
+    $ip = $ipList[rand(0, count($ipList))];
+    $useragent = $userAgentList[rand(0, count($userAgentList))];
+
+    //echo $ip . '<br>';
+
+    try {
+        $response = $proxyApi->testIp($ip, $useragent, $showResponse = true);
+    } catch (Exception $e) {
+        echo $e;
+    }
+    
+    print_r($response);
+    echo "<br><br>";
+    echo "-------------------------------";
+    echo "<br><br>";
 }   
 
 

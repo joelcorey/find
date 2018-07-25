@@ -10,7 +10,8 @@ class Config
     public function __construct()
     {
         $this->load = array(
-            'useragentlist'
+            'useragentlist',
+            'ipsourcelist'
         );
 
         $this->loadFiles();

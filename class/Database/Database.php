@@ -1,6 +1,8 @@
 <?php 
 
-class database
+namespace Database;
+
+class Database
 {
     private $name;
     public $file_db;
@@ -11,7 +13,7 @@ class database
         $this->name = $name;
         try 
         {
-            $this->file_db = new PDO('sqlite:' . $name . '.sqlite3');
+            $this->file_db = new PDO('../../data/sqlite:' . $name . '.sqlite3');
             $this->file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->createTableIp();
         } 
@@ -43,7 +45,5 @@ class database
         $statement->bindParam(':port', $port);
         $statement->execute();
     }
-
-    
 
 }

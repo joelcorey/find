@@ -7,11 +7,6 @@ class ProxyAPI
     private $inputIpList;
     private $ipList = [];
 
-    public function getProxyList($url)
-    {
-        return $this->regexIpAddress($this->get($url));
-    }
-
     public function getUnmaskedIp()
     {
         $externalContent = file_get_contents('http://checkip.dyndns.com/');
@@ -92,30 +87,5 @@ class ProxyAPI
                 echo "Error: non 200 http_code detected: " . $curl_scraped_page->code;
         }
         echo '<br><br>';
-    }
-
-    public function regexIpAddress($input)
-    {
-        $out = [];
-        $regex = '/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):\d{1,5}\b/';
-        preg_match_all($regex, $input, $out);
-        return $this->removeWrapperArray($out);
-    }
-
-    public function removeWrapperArray(&$array)
-    {
-        $new_array = [];
-        for ($i=0; $i < count($array[0]); $i++) { 
-            $new_array[$i] = $array[0][$i];
-        }
-        return $new_array;
-    }
-
-    public static function echoArray($array)
-    {
-        for ($i=0; $i < count($array); $i++) 
-        { 
-            echo $array[$i] . '<br>';
-        }
     }
 }

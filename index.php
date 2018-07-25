@@ -4,11 +4,12 @@ require __DIR__  . '/vendor/autoload.php';
 require __DIR__  . '/class/autoload.php';
 
 $config = new \Config\Config();
+$util = new \Util\Util();
 $proxyApi = new \ProxyApi\ProxyApi();
 
 $userAgentList = $config->assign('useragentlist');
 
-$ipList = $proxyApi->getProxyList('https://github.com/clarketm/proxy-list/blob/master/proxy-list.txt');
+$ipList = $util->getProxyList('https://github.com/clarketm/proxy-list/blob/master/proxy-list.txt');
 
 print_r($ipList);
 

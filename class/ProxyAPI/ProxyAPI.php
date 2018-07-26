@@ -29,6 +29,7 @@ class ProxyAPI
             ->addOnCurlOption(CURLOPT_PROXY, $proxyIp)
             ->addOnCurlOption(CURLOPT_USERAGENT, $useragent)
             ->send();
+        //$page = $this->doCurl('https://api.ipify.org?format=json', $proxyIp, $useragent);
 
         if($showResponse !== false)
         {
@@ -80,7 +81,7 @@ class ProxyAPI
         $url = 'https://api.ipify.org?format=json';
 
         $curl_scraped_page = \Httpful\Request::get($url)
-        ->addHeader("User-Agent", $userAgent)
+        ->header("User-Agent:", $userAgent)
         ->useProxy($ip, $port)
         ->send();
         if ($curl_scraped_page->code === "200") {

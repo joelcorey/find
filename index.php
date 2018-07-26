@@ -14,9 +14,9 @@ $ipSource = $config->assign('ipsourcelist');
 $ipList = $util->getProxyList($ipSource[0]);
 //print_r($ipList);
 
-//ENTRY: continue work on test and in-validate bad response ip's
+//ENTRY: continue work on test and invalidate bad response ip's
 //ENTRY: verify actual useragent/fix
-for ($i=0; $i < 3; $i++) 
+for ($i=0; $i < 2; $i++) 
 {
     $ip = $ipList[rand(0, count($ipList))];
     $useragent = $userAgentList[rand(0, count($userAgentList))];

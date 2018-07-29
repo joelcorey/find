@@ -1,7 +1,7 @@
 <?php 
 
 namespace Database;
-
+use PDO;
 class Database
 {
     private $name;
@@ -13,7 +13,7 @@ class Database
         $this->name = $name;
         try 
         {
-            $this->file_db = new PDO('../../data/sqlite:' . $name . '.sqlite3');
+            $this->file_db = new PDO('sqlite:' . $name . '.sqlite3');
             $this->file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->createTableIp();
         } 

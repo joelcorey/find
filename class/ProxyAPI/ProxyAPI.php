@@ -56,7 +56,7 @@ class ProxyAPI
         return $array;
     }
 
-    public function doCurl($url, $proxy, $useragent)
+    public function doCurl($url, $proxy, $useragent, $connectionTimeout = 5, $timeout = 10)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
@@ -67,8 +67,15 @@ class ProxyAPI
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        //Time spent attempting to connect:
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $connectionTimeout);
+        //Max total time spent:
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
         $curl_scraped_page = curl_exec($ch);
         $this->responseInfo(curl_getinfo($ch));
+        // if(curl_errno($ch)){
+        //     throw new Exception(curl_error($ch));
+        // }
         curl_close($ch);
         return $curl_scraped_page;
     }

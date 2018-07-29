@@ -1,5 +1,7 @@
 <?php
 
+set_time_limit(500);
+
 require __DIR__  . '/vendor/autoload.php';
 require __DIR__  . '/class/autoload.php';
 
@@ -20,19 +22,17 @@ for ($i=0; $i < 2; $i++)
 {
     $ip = $ipList[rand(0, count($ipList))];
     $useragent = $userAgentList[rand(0, count($userAgentList))];
-
-    //echo $ip . '<br>';
+    
+    echo 'Use these: ' . $ip . ' ' . $useragent . '<br>';
+    echo "-------------------------------<br>";
 
     try {
-        $response = $proxyApi->testIp($ip, $useragent, $showResponse = true);
+        $response = $proxyApi->testIp($ip, $useragent);
     } catch (Exception $e) {
         echo $e;
     }
     
-    print_r($response);
-    echo "<br><br>";
-    echo "-------------------------------";
-    echo "<br><br>";
-}   
+    print_r($proxyApi->curlResponse);
+    echo "<br><br><br>";
 
-
+}

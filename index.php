@@ -8,6 +8,8 @@ $util = new \Util\Util();
 $proxyApi = new \ProxyApi\ProxyApi();
 $database = new \Database\Database();
 
+set_time_limit(0);
+
 date_default_timezone_set('America/Los_Angeles');
 // echo(date("Y:m:d:l:H:i:s"));
 // die();
@@ -19,7 +21,7 @@ $ipList = $util->getProxyList($ipSource[0]);
 //print_r($ipList);
 
 //ENTRY: continue work on test and invalidate bad response ip's
-for ($i=0; $i < 2; $i++) 
+for ($i=0; $i < 100; $i++) 
 {
     $proxyIp = $ipList[rand(0, count($ipList))];
     $useragent = $userAgentList[rand(0, count($userAgentList))];
@@ -55,7 +57,7 @@ for ($i=0; $i < 2; $i++)
             $rawData                = json_encode($proxyApi->curlResponse);
             $timeStamp              = date("Y:m:d:l:H:i:s");
 
-            $database->insertIpAddress($ip, $port, $httpCode, $totalTime, $nameLookupTime, $connectTime, $pretransferTime, $speedDownload, $startupTransfertime, $rawData, $timeStamp);
+            $database->insertIpAddress($ip, $port, $httpCode, $totalTime, $nameLookupTime, $connectTime, $pretransferTime, $speedDownload, $startupTransferTime, $rawData, $timeStamp);
         }
         
     } catch (Exception $e) {

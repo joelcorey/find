@@ -38,7 +38,7 @@ class Database
                 connectionTime text(50),
                 pretransferTime text(50),
                 speedDownload text(50),
-                startupTransfertime text(50),
+                startupTransferTime text(50),
                 rawData text(50),
                 timeOfConnection text(50)
             )"
@@ -54,7 +54,7 @@ class Database
         $connectionTime = NULL, 
         $pretransferTime = NULL, 
         $speedDownload = NULL, 
-        $startupTransfertime = NULL, 
+        $startupTransferTime = NULL, 
         $rawData = NULL, 
         $timeOfConnection = NULL)
     {
@@ -67,7 +67,7 @@ class Database
             connectionTime, 
             pretransferTime, 
             speedDownload, 
-            startupTransfertime, 
+            startupTransferTime, 
             rawData, 
             timeOfConnection) 
             VALUES (
@@ -79,9 +79,10 @@ class Database
             :connectionTime, 
             :pretransferTime, 
             :speedDownload, 
-            :startupTransfertime, 
+            :startupTransferTime, 
             :rawData, 
             :timeOfConnection)";
+            
         $statement = $this->file_db->prepare($insert);
         $statement->bindParam(':address', $address);
         $statement->bindParam(':port', $port);
@@ -91,7 +92,7 @@ class Database
         $statement->bindParam(':connectionTime', $connectionTime);
         $statement->bindParam(':pretransferTime', $pretransferTime);
         $statement->bindParam(':speedDownload', $speedDownload);
-        $statement->bindParam(':startupTransfertime', $startupTransfertime);
+        $statement->bindParam(':startupTransferTime', $startupTransferTime);
         $statement->bindParam(':rawData', $rawData);
         $statement->bindParam(':timeOfConnection', $timeOfConnection);
         $statement->execute();

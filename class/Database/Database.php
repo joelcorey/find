@@ -7,15 +7,15 @@ class Database
     private $name;
     public $file_db;
 
-    public function __construct($name = "findit")
+    public function __construct($name = "find")
     {
         date_default_timezone_set('UTC');
         $this->name = $name;
         try 
         {
-            $this->file_db = new PDO('sqlite:' . $name . '.sqlite3');
+            $this->file_db = new PDO('sqlite:' . './data/' . $name . '.sqlite3');
             $this->file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->createTableIp();
+            $this->createTableIpAddresses();
         } 
             catch (Exception $e) 
         {
@@ -23,15 +23,25 @@ class Database
         }        
     }
 
-    public function createTableIp()
+    public function createTableIpAddresses()
     {
-        $this->file_db->exec
-        (
-            "CREATE TABLE IF NOT EXISTS ip 
+
+        $this->file_db->exec(
+            "CREATE TABLE IF NOT EXISTS ipAddresses 
             (
                 id INTEGER PRIMARY KEY, 
                 address TEXT, 
-                port TEXT, 
+                port TEXT,
+                httpCode text,
+                totalTime text,
+                nameLookupTime text,
+                connectionTime text,
+                pretransferTime text,
+                speedDownload text,
+                startupTransfertime text,
+                rawData text
+
+                raw
                 time INTEGER
             )"
         );

@@ -30,22 +30,22 @@ class Database
             "CREATE TABLE IF NOT EXISTS ipAddresses 
             (
                 id INTEGER PRIMARY KEY, 
-                address TEXT, 
-                port TEXT,
-                httpCode text,
-                totalTime text,
-                nameLookupTime text,
-                connectionTime text,
-                pretransferTime text,
-                speedDownload text,
-                startupTransfertime text,
-                rawData text,
-                timeOfConnection INTEGER
+                address TEXT(50), 
+                port TEXT(50),
+                httpCode text(50),
+                totalTime text(50),
+                nameLookupTime text(50),
+                connectionTime text(50),
+                pretransferTime text(50),
+                speedDownload text(50),
+                startupTransfertime text(50),
+                rawData text(50),
+                timeOfConnection text(50)
             )"
         );
     }
 
-    public function insertIp(
+    public function insertIpAddress(
         $address, 
         $port, 
         $httpCode = NULL, 
@@ -61,15 +61,15 @@ class Database
         $insert = "INSERT INTO ip (
             address, 
             port, 
-            $httpCode, 
-            $totalTime, 
-            $nameLookupTime, 
-            $connectionTime, 
-            $pretransferTime, 
-            $speedDownload, 
-            $startupTransfertime, 
-            $rawData, 
-            $timeOfConnection) 
+            httpCode, 
+            totalTime, 
+            nameLookupTime, 
+            connectionTime, 
+            pretransferTime, 
+            speedDownload, 
+            startupTransfertime, 
+            rawData, 
+            timeOfConnection) 
             VALUES (
             :address, 
             :port, 

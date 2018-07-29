@@ -39,20 +39,61 @@ class Database
                 pretransferTime text,
                 speedDownload text,
                 startupTransfertime text,
-                rawData text
-
-                raw
-                time INTEGER
+                rawData text,
+                timeOfConnection INTEGER
             )"
         );
     }
 
-    public function insertIp($address, $port)
+    public function insertIp(
+        $address, 
+        $port, 
+        $httpCode = NULL, 
+        $totalTime = NULL, 
+        $nameLookupTime = NULL, 
+        $connectionTime = NULL, 
+        $pretransferTime = NULL, 
+        $speedDownload = NULL, 
+        $startupTransfertime = NULL, 
+        $rawData = NULL, 
+        $timeOfConnection = NULL)
     {
-        $insert = "INSERT INTO ip (address, port) VALUES (:address, :port)";
+        $insert = "INSERT INTO ip (
+            address, 
+            port, 
+            $httpCode, 
+            $totalTime, 
+            $nameLookupTime, 
+            $connectionTime, 
+            $pretransferTime, 
+            $speedDownload, 
+            $startupTransfertime, 
+            $rawData, 
+            $timeOfConnection) 
+            VALUES (
+            :address, 
+            :port, 
+            :httpCode, 
+            :totalTime, 
+            :nameLookupTime, 
+            :connectionTime, 
+            :pretransferTime, 
+            :speedDownload, 
+            :startupTransfertime, 
+            :rawData, 
+            :timeOfConnection)";
         $statement = $this->file_db->prepare($insert);
         $statement->bindParam(':address', $address);
         $statement->bindParam(':port', $port);
+        $statement->bindParam(':httpCode', $httpCode);
+        $statement->bindParam(':totalTime', $totalTime);
+        $statement->bindParam(':nameLookupTime', $nameLookupTime);
+        $statement->bindParam(':connectionTime', $connectionTime);
+        $statement->bindParam(':pretransferTime', $pretransferTime);
+        $statement->bindParam(':speedDownload', $speedDownload);
+        $statement->bindParam(':startupTransfertime', $startupTransfertime);
+        $statement->bindParam(':rawData', $rawData);
+        $statement->bindParam(':timeOfConnection', $timeOfConnection);
         $statement->execute();
     }
 

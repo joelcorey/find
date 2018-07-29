@@ -58,7 +58,7 @@ class Database
         $rawData = NULL, 
         $timeOfConnection = NULL)
     {
-        $insert = "INSERT INTO ip (
+        $insert = "INSERT INTO ipAddresses (
             address, 
             port, 
             httpCode, 

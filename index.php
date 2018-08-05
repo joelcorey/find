@@ -20,7 +20,11 @@ $ipSource = $config->assign('ipsourcelist');
 $ipList = $util->getProxyList($ipSource[1]);
 //print_r($ipList);
 
-$database->selectValidIpAddresses();
+$sql = 'SELECT address, port FROM ipAddresses WHERE httpCode = "200"';
+$result = $database->selectSql($sql);
+foreach ($result as $r) {
+    echo $r['address'] . ':' . $r['port'] . '</br>';
+}
 
 $doIp = 0;
 //ENTRY: continue work on test and invalidate bad response ip's

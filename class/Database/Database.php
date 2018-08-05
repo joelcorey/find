@@ -23,17 +23,11 @@ class Database
         }        
     }
 
-    public function selectValidIpAddresses()
+    public function selectSql($sql)
     {
-        $sql = 'SELECT address, port FROM ipAddresses WHERE httpCode = "200"';
         $statement = $this->file_db->prepare($sql);
         $statement->execute();
-        $result = $statement->fetchAll();
-        foreach ($result as $r) {
-            //print_r($r);
-            echo $r['address'] . ':' . $r['port'] . '</br>';
-
-        }
+        return $statement->fetchAll();
     }
 
     public function createTableIpAddresses()

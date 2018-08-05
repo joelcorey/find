@@ -5,7 +5,7 @@ use PDO;
 class Database
 {
     private $name;
-    public $file_db;
+    private $file_db;
 
     public function __construct($name = "find")
     {
@@ -23,9 +23,21 @@ class Database
         }        
     }
 
+    public function selectValidIpAddresses()
+    {
+        $sql = 'SELECT address, port FROM ipAddresses WHERE httpCode = "200"';
+        $statement = $this->file_db->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        foreach ($result as $r) {
+            //print_r($r);
+            echo $r['address'] . ':' . $r['port'] . '</br>';
+
+        }
+    }
+
     public function createTableIpAddresses()
     {
-
         $this->file_db->exec(
             "CREATE TABLE IF NOT EXISTS ipAddresses 
             (

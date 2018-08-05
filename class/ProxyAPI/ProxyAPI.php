@@ -56,14 +56,27 @@ class ProxyAPI
         return $array;
     }
 
-    public function doCurl($url, $proxy, $useragent, $connectionTimeout = 5, $timeout = 10)
+    // $options = array(
+    //     CURLOPT_URL => $url,
+    //     CURLOPT_RETURNTRANSFER => TRUE,
+    //     CURLOPT_FOLLOWLOCATION => TRUE,
+    //     CURLOPT_AUTOREFERER => TRUE,
+    //     CURLOPT_USERAGENT => $agent,
+    //     CURLOPT_TIMEOUT => 1800
+    // );
+
+    public function doCurl($url, $proxy, $useragent, $connectionTimeout = 5, $timeout = 10, $followLocation = 0)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_PROXY, $proxy);
         //curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyauth);
-        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        //if ($followLocation = 1) {
+           curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+           curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
+
+        //}
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);

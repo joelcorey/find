@@ -21,10 +21,21 @@ $ipList = $util->getProxyList($ipSource[1]);
 //print_r($ipList);
 
 $sql = 'SELECT address, port FROM ipAddresses WHERE httpCode = "200"';
+//$sql = 'SELECT * FROM ipAddresses';
 $result = $database->selectSql($sql);
-foreach ($result as $r) {
-    echo $r['address'] . ':' . $r['port'] . '</br>';
-}
+// foreach ($result as $r) {
+//     echo $r['address'] . ':' . $r['port'] . '</br>';
+// }
+
+//print_r($result);
+//print_r($result[0]);
+
+$url = 'https://salem.craigslist.org/';
+$ip = $result[0]['address'] . ':' . $result[0]['port'];
+$useragent = $userAgentList[rand(0, count($userAgentList))];
+
+$page = $proxyApi->doCurl($url, $ip, $useragent, 1800, 0);
+print_r($page);
 
 $doIp = 0;
 //ENTRY: continue work on test and invalidate bad response ip's

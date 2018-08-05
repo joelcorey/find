@@ -27,7 +27,7 @@ class Database
     {
         $statement = $this->file_db->prepare($sql);
         $statement->execute();
-        return $statement->fetchAll();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function createTableIpAddresses()

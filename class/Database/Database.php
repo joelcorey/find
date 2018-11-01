@@ -29,7 +29,7 @@ class Database
         $this->name = $name;
         try 
         {
-            $this->$pdo = new PDO("mysql:host=mysql;dbname=$dbname", "project", "project");
+            $this->$pdo = new PDO("mysql:host=database;dbname=$dbname", "project", "project");
             $this->$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->$pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
             $this->createTableIpAddresses();

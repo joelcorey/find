@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "docker/nginx"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "/home/joel/install/project/findit"
+		}
+	],
+	"settings": {}
+}

@@ -1,1 +1,3 @@
-FROM php:7.2.7-fpm
+FROM php:7.2.11-fpm
+
+RUN docker-php-ext-install pdo pdo_mysql

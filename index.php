@@ -18,7 +18,8 @@ $userAgentList = $config->assign('useragentlist');
 $ipSource = $config->assign('ipsourcelist');
 
 $ipList = $util->getProxyList($ipSource[1]);
-//print_r($ipList);
+print_r($ipList);
+die();
 
 $sql = 'SELECT address, port FROM ipAddresses WHERE httpCode = "200"';
 //$sql = 'SELECT * FROM ipAddresses';

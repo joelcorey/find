@@ -5,16 +5,33 @@ use PDO;
 class Database
 {
     private $name;
-    private $file_db;
+    private $pdo;
 
-    public function __construct($name = "find")
+    // public function __construct($name = "find")
+    // {
+    //     date_default_timezone_set('UTC');
+    //     $this->name = $name;
+    //     try 
+    //     {
+    //         $this->file_db = new PDO('sqlite:' . './data/' . $name . '.sqlite3');
+    //         $this->file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //         $this->createTableIpAddresses();
+    //     } 
+    //         catch (Exception $e) 
+    //     {
+    //         die('Query fail error: '. $e->getMessage());
+    //     }        
+    // }
+
+    public function __construct($dbname = "find")
     {
         date_default_timezone_set('UTC');
         $this->name = $name;
         try 
         {
-            $this->file_db = new PDO('sqlite:' . './data/' . $name . '.sqlite3');
-            $this->file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->$pdo = new PDO("mysql:host=mysql;dbname=$dbname", "project", "project");
+            $this->$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->$pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
             $this->createTableIpAddresses();
         } 
             catch (Exception $e) 
@@ -25,14 +42,14 @@ class Database
 
     public function selectSql($sql)
     {
-        $statement = $this->file_db->prepare($sql);
+        $statement = $this->$pdo->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function createTableIpAddresses()
     {
-        $this->file_db->exec(
+        $this->$pdo->exec(
             "CREATE TABLE IF NOT EXISTS ipAddresses 
             (
                 id INTEGER PRIMARY KEY, 
